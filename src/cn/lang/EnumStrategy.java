@@ -9,14 +9,20 @@ public enum EnumStrategy {
 	ADD("+"){
 
 		@Override
-		public int execu(int a, int b) {
-			return a+b;
+		public int execu(int a, int...b) {
+			for(int i=0;i<b.length;i++){
+				a = a+b[i];
+			}
+			return a;
 		}
 	},
 	SUB("-") {
 		@Override
-		public int execu(int a, int b) {
-			return a-b;
+		public int execu(int a, int...b) {
+			for(int i=0;i<b.length;i++){
+				a = a-b[i];
+			}
+			return a;
 		}
 	};
 	String value;
@@ -25,15 +31,13 @@ public enum EnumStrategy {
 		this.value = value;
 	}
 	//声明抽象方法，枚举中必须实现
-	public abstract int execu(int a, int b);
+	public abstract int execu(int a, int...b);
 
 	
 	public static void main(String[] args) {
-		int a = 123;
-		int b = 456;
-		int resultAdd = EnumStrategy.ADD.execu(a, b);
+		int resultAdd = EnumStrategy.ADD.execu(1);
 		System.out.println(resultAdd);
-		int resultSub = EnumStrategy.SUB.execu(a, b);
+		int resultSub = EnumStrategy.SUB.execu(1);
 		System.out.println(resultSub);
 	}
 }
